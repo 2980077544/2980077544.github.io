@@ -65,7 +65,7 @@ gitalk:
   clientSecret: 8d0f8dc32e7d307716b3fb92c1e901131c333dd2    #生成的clientSecret
   repo: 2980077544.github.io    #仓库名称
   owner: 2980077544    # github用户名
-  admin: yuanwow
+  admin: 2980077544
   distractionFreeMode: true # 是否启用类似FB的阴影遮罩
 
 
