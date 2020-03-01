@@ -66,6 +66,9 @@
             </div>
         </div>
     </div>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        本页访问了<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次哦~~
+    </span>
 </footer>
 
 <!-- jQuery -->
@@ -107,7 +110,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async('cdn.jsdelivr.net/gh/2980077544/2980077544.github.io/js/jquery.tagcloud.js',function(){
+        async("//cdn.jsdelivr.net/gh/2980077544/2980077544.github.io/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -173,7 +176,7 @@
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav
      * Fork by Hux to support padding
      */
-    async("{{ 'cdn.jsdelivr.net/gh/2980077544/2980077544.github.io/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
+    async("//cdn.jsdelivr.net/gh/2980077544/2980077544.github.io/js/jquery.nav.js", function () {
         $('.catalog-body').onePageNav({
             currentClass: "active",
             changeHash: !1,
