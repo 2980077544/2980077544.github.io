@@ -1,0 +1,109 @@
+        .w{/*windows*/
+            position: fixed;
+            top:50px;
+            left:50px;
+            width: 200px;
+            height: 205px;
+            background: rgba(187,187,187,0.8);
+            color:rgba(0,0,0,0.8);
+            border:none;
+            border-left:1px solid #444444;
+            border-right:;1px solid #444444;
+            border-bottom:1px solid #444444;
+            outline:none;
+            z-index:0;
+        }
+        .w .t{/*title*/
+            position: absolute;
+            top:0;
+            left:0;
+            width: 180px;
+            height: 25px;
+            background: rgba(68,68,68,0.8);
+            overflow:auto;
+            overflow-x:scroll;
+            overflow-y:none;
+        }
+        .w .m{/*main*/
+            position: absolute;
+            top:25px;
+            left:0;
+            width: 199px;
+            height: 179px;
+            overflow:auto;
+            overflow-y:scroll;
+            border:none;
+        }
+        .w .c{/*close*/
+            position: absolute;
+            top:0;
+            left:180px;
+            width: 20px;
+            height: 20px;
+            background:#f00;
+            color:rgba(255,255,255,0.8);
+            text-align:center;
+        }
+        #task{/*任务栏*/
+            white-space:nowrap;
+            border:none;
+            position: absolute;
+            bottom:0;
+            left:0;
+            width: 100%;
+            height: 25px;
+            background:#b6b;
+            color:rgba(0,0,0,0.8);
+            z-index:99999;/*任务栏最高*/
+            nowrap:false;
+        }
+        #task *{
+            display:inline;
+            white-space:nowrap;
+            nowrap:false;
+        }
+        #task #start{/*开始按钮*/
+            background:rgba(187,187,187,0.8);;
+            color:green;
+        }
+        #task #list{/*任务列表*/
+            border:none;
+            overflow:auto;
+            overflow-x:scroll;
+            overflow-y:none;
+        }
+        /*主要框架样式*/
+        body{
+            background:#369;
+        }
+        /*强制禁用拖动*/
+        html,body{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        /*滚动条样式*/
+        div::-webkit-scrollbar {
+            width: 4px;    
+            /*height: 4px;*/
+        }
+        div::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.2);
+        }
+        div::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            border-radius: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        /*字体引入*/
+        @font-face {
+  font-family: 'xs58';/*字体名称*/
+  src: url('font.ttf');/*字体源文件*/
+        }
+        * {
+            font-family:xs58;
+        }
