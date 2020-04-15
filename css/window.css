@@ -72,10 +72,6 @@
             overflow-x:scroll;
             overflow-y:none;
         }
-        /*主要框架样式*/
-        body{
-            background:#369;
-        }
         /*滚动条样式*/
         div::-webkit-scrollbar {
             width: 4px;    
