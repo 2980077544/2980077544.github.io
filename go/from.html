@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>跳转</title>
+    <!--[if IE]>
+      <script src="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/base64-polyfill.js"></script>
+    <![endif]-->
+    <script>
+      function getQueryString(name) {
+       let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+       let r = window.location.search.substr(1).match(reg);
+       if (r != null) return unescape(r[2]);
+       return null;
+      }
+      var from = getQueryString('from');
+      function jumpurl(){
+        if(from=="yuanwow"){
+          document.getElementById("url").value="https://29800777544.github.io/go/to.html?from=yuanwow#"+window.btoa(document.getElementById("code").value);
+        }
+　  　}
+      
+    </script>
+  </head>
+  <body>
+    <h1>创建链接只需三步</h1>
+    <p>1.在以下框内输入你要转换的原始链接</p>
+    <p><input id="code"/></p>
+    <p>2.点击下面的转换按钮</p>
+    <p><button id="jump" Onclick="jumpurl()">点击转换</button></p>
+    <p>3.从框内复制跳转链接</p>
+    <p><input id="url" readonly/></p>
+    <hr/>
+    <p>作者对此项目的付出没有任何收入，请珍惜作者的劳动成果。</p>
+    <noscript><p>你的浏览器不支持Javascript，请升级浏览器。</p></noscript>
+  </body>
+</html>
