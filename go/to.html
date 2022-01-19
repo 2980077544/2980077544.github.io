@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>跳转</title>
+    <!--[if IE]>
+      <script src="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/base64-polyfill.js"></script>
+    <![endif]-->
+    <script>
+      function getQueryString(name) {
+       let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+       let r = window.location.search.substr(1).match(reg);
+       if (r != null) return unescape(r[2]);
+       return null;
+      }
+      var from = getQueryString('from');
+      function jumurl(){
+        if(from=="yuanwow"){
+          var timestamp1 = Date.parse( new Date());
+          var code = (Array(6).join("f") + sha1((Math.ceil(timestamp1/30000+69988)%1000000+3522)+"hi5")).slice(-6);
+          if(code==getElementById("code").value) {
+          window.location.href = window.atob(location.hash.slice(1));
+          }else{
+            getElementById("code").value=="验证码错误";
+            
+          }
+        }
+　  　}
+      
+    </script>
+  </head>
+  <body>
+    <h1>跳转到你想要的链接只需三步</h1>
+    <p>1.使用微信扫描以下小程序码获取验证码</p>
+    <img src = 'https://s3.bmp.ovh/imgs/2022/01/f6df307f79d304ba.jpg' />
+    <p>2.在以下框内填写验证码(验证码30秒内有效,自动更新)</p>
+    <p><input id="code"/></p>
+    <p>3.点击下面的跳转按钮</p>
+    <p><button id="jump" Onclick="jumpurl()">点击跳转</button></p>
+    <hr/>
+    <p>作者对此项目的付出没有任何收入，请珍惜作者的劳动成果。</p>
+    <noscript><p>你的浏览器不支持Javascript，请升级浏览器。</p></noscript>
+  </body>
+</html>
