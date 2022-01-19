@@ -5,7 +5,7 @@ header-img: img/home-bg-he.png
 email: 2980077544@qq.com
 description: "Yuanwow的博客"
 keyword: "yuanwow, yuanwow的博客, Yuanwow, YuanWow"
-url: "https://2980077544.github.io"          # your host, for absolute URL
+url: "https://blog.left.ga"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/2980077544/2980077544.github.io.git" #code repository | 代码仓库
 
@@ -33,7 +33,7 @@ csdn_username: yuanwow
 permalink: pretty
 paginate: 10
 # 转换时排除某些文件夹或文件。被排除的文件或文件夹的路径是相对于网站源码目录的，源码目录以外不受影响。
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","go"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 Regeneration: true    # 允许文件修改时自动重新生成网站。
