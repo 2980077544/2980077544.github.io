@@ -65,10 +65,10 @@ function sha1(s) {
         if(from=="yuanwow"){
           var timestamp1 = Date.parse( new Date());
           var code = (Array(6).join("f") + sha1((Math.ceil(timestamp1/30000+69988)%1000000+3522)+"hi5")).slice(-6);
-          if(code==getElementById("code").value) {
+          if(code==document.getElementById("code").value) {
           window.location.href = window.atob(location.hash.slice(1));
           }else{
-            getElementById("code").value=="验证码错误";
+            document.getElementById("code").value=="验证码错误";
             
           }
         }
