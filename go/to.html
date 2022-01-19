@@ -12,7 +12,7 @@
        return null;
       }
       var from = getQueryString('from');
-      function jumurl(){
+      function jumpurl(){
         if(from=="yuanwow"){
           var timestamp1 = Date.parse( new Date());
           var code = (Array(6).join("f") + sha1((Math.ceil(timestamp1/30000+69988)%1000000+3522)+"hi5")).slice(-6);
