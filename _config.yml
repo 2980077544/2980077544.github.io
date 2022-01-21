@@ -33,7 +33,7 @@ csdn_username: yuanwow
 permalink: pretty
 paginate: 10
 # 转换时排除某些文件夹或文件。被排除的文件或文件夹的路径是相对于网站源码目录的，源码目录以外不受影响。
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","go"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 Regeneration: true    # 允许文件修改时自动重新生成网站。
@@ -103,6 +103,6 @@ friends: [
         href: "https://gaobaizi-game.github.io"
     },{
         title: "小铭的日常生活",
-	href: "http://chenming.yeshaocloud.top:429"
+        href: "http://chenming.yeshaocloud.top:429"
     }
 ]
