@@ -1,0 +1,305 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>打开页面</title>
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <script>
+        window.onerror = e => {
+            console.error(e)
+            alert('发生错误' + e)
+        }
+    </script>
+    <!-- weui 样式 -->
+    <link rel="stylesheet" href="./打开页面_files/weui.min.css">
+    
+    <!-- 调试用的移动端 console -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script> -->
+    <!-- 公众号 JSSDK -->
+    <script src="./打开页面_files/jweixin-1.6.0.js.下载"></script>
+    <script src="./打开页面_files/jquery.min.js.下载"></script>
+    <script>
+        function docReady(fn) {
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                fn()
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+ 
+        function getQueryStringValue(key) {
+            return decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'));
+        }
+ 
+        var aid = getQueryStringValue('id');
+        if (aid == "") {
+            aid = getQueryStringValue('r');
+        }
+        window.url_detail = {}
+ 
+ 
+        docReady(() => {
+            $.getJSON("/config/" + aid + ".json", (e) => {
+                window.url_detail = e;
+                loadDone();
+            })
+        })
+ 
+        function loadDone() {
+            var temp_img = new Image();
+            temp_img.src = 'https://1306868817533408.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/extensionLinkApi/v1/?action=record_wlscq&id=' + aid;
+ 
+            var ua = navigator.userAgent.toLowerCase()
+            var isWXWork = ua.match(/wxwork/i) == 'wxwork'
+            var isWeixin = !isWXWork && ua.match(/MicroMessenger/i) == 'micromessenger'
+            var isMobile = false
+            var isDesktop = false
+            if (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|IEMobile)/i)) {
+                isMobile = true
+            } else {
+                isDesktop = true
+            }
+            console.warn('ua', ua)
+            console.warn(ua.match(/MicroMessenger/i) == 'micromessenger')
+            var m = ua.match(/MicroMessenger/i)
+            console.warn(m && m[0] === 'micromessenger')
+ 
+            if (isWeixin) {
+                var appName = document.getElementById('wechat-app-name')
+                appName.innerHTML = window.url_detail.nickname
+ 
+                var containerEl = document.getElementById('wechat-web-container')
+                containerEl.classList.remove('hidden')
+                containerEl.classList.add('full', 'wechat-web-container')
+ 
+                var launchBtn = document.getElementById('launch-btn')
+                launchBtn.setAttribute("username", window.url_detail.username)
+                launchBtn.setAttribute("path", window.url_detail.path)
+ 
+                launchBtn.addEventListener('ready', function (e) {
+                    var containerE2 = document.getElementById('wechat-web-container-title')
+                    containerE2.classList.remove('hidden')
+ 
+                    var containerLoading = document.getElementById('loading')
+                    containerLoading.classList.add('hidden')
+                })
+                launchBtn.addEventListener('launch', function (e) {
+                })
+                launchBtn.addEventListener('error', function (e) {
+                })
+ 
+                $.getScript("//1306868817533408.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/extensionLinkApi/v1/wlscq_jssdk?url=" + encodeURIComponent(location.href.split('#')[0]), function (e) {
+                    console.log(e)
+                });
+            } else if (isDesktop) {
+                var containerEl = document.getElementById('desktop-web-container')
+                containerEl.classList.remove('hidden')
+                containerEl.classList.add('full', 'desktop-web-container')
+ 
+                var containerLoading = document.getElementById('loading')
+                containerLoading.classList.add('hidden')
+            } else {
+                var appName = document.getElementById('public-app-name')
+                appName.innerHTML = window.url_detail.nickname
+ 
+                var containerLoading = document.getElementById('loading')
+                containerLoading.classList.add('hidden')
+ 
+                var containerEl = document.getElementById('public-web-container')
+                containerEl.classList.remove('hidden')
+                containerEl.classList.add('full', 'public-web-container')
+ 
+                var buttonEl = document.getElementById('public-web-jump-button')
+                var buttonLoadingEl = document.getElementById('public-web-jump-button-loading')
+ 
+                try {
+                    openWeapp(() => {
+                        buttonEl.classList.remove('weui-btn_loading')
+                        buttonLoadingEl.classList.add('hidden')
+                    })
+                } catch (e) {
+                    buttonEl.classList.remove('weui-btn_loading')
+                    buttonLoadingEl.classList.add('hidden')
+                    throw e
+                }
+            }
+        }
+ 
+        function openWeapp(onBeforeJump) {
+            if (onBeforeJump) {
+                onBeforeJump()
+            }
+            location.href = window.url_detail.scheme
+        }
+    </script>
+    <style>
+        .hidden {
+            display: none;
+        }
+ 
+        .full {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+ 
+        .public-web-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .public-web-container p {
+            position: absolute;
+            top: 40%;
+        }
+ 
+        .public-web-container a {
+            position: absolute;
+            bottom: 40%;
+        }
+ 
+        .wechat-web-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .wechat-web-container p {
+            position: absolute;
+            top: 40%;
+        }
+ 
+        .wechat-web-container wx-open-launch-weapp {
+            position: absolute;
+            bottom: 40%;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .desktop-web-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .desktop-web-container p {
+            position: absolute;
+            top: 40%;
+        }
+    </style>
+    <style type="text/css">
+        body {
+            font-size: 16px;
+            line-height: 1.4;
+            font-family: -apple-system-font, Helvetica Neue, sans-serif
+        }
+ 
+        * {
+            padding: 0;
+            margin: 0
+        }
+ 
+        .toast {
+            transition-duration: .2s;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            top: 45%;
+            z-index: 2000;
+            position: fixed;
+            width: 7.6em;
+            min-height: 7.6em;
+            left: 50%;
+            background: hsla(0, 0%, 7%, .7);
+            text-align: center;
+            border-radius: 5px;
+            color: #fff
+        }
+ 
+        .toast.toast--visible {
+            opacity: 1;
+            visibility: visible
+        }
+ 
+        .icon_toast.loading {
+            margin: 30px 0 0;
+            width: 38px;
+            height: 38px;
+            vertical-align: baseline
+        }
+ 
+        .icon_toast {
+            font-size: 55px;
+            color: #fff
+        }
+ 
+        .loading {
+            display: inline-block;
+            animation: e 1s steps(12) infinite;
+            background: transparent url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4=) no-repeat;
+            background-size: 100%
+        }
+ 
+        i {
+            font-style: italic
+        }
+ 
+        @keyframes e {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+ 
+            to {
+                -webkit-transform: rotate(1turn);
+                transform: rotate(1turn)
+            }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div id="loading" class="toast loading_toast toast--visible hidden">
+        <div><i class="loading icon_toast"></i></div>
+        <p class="toast_content">正在加载...</p>
+    </div>
+    <div class="page full">
+        <div id="public-web-container" class="hidden">
+            <p class="">正在打开 “<span id="public-app-name"></span>”...</p>
+            <a id="public-web-jump-button" href="javascript:void(0)" class="weui-btn weui-btn_primary weui-btn_loading" onclick="openWeapp()">
+                <span id="public-web-jump-button-loading" class="weui-primary-loading weui-primary-loading_transparent"><i class="weui-primary-loading__dot"></i></span>
+                点击这里打开
+                <svg style="overflow: visible;isolation: isolate;height:18px;width:18px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 18 18" xml:space="preserve">
+                    <g>
+                        <g transform="translate(10 10)">
+                            <g style="pointer-events:visible;">
+                                <circle cx="1" opacity="0.7" cy="1" fill="#fff" r="12.5">
+                                    <animate attributeName="r" values="10.5;13;10.5" begin="0s" dur="1.2s" repeatCount="indefinite">
+                                    </animate>
+                                </circle>
+                                <circle cx="1" cy="1" fill="#fff" r="4.16"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <div id="wechat-web-container" class="hidden">
+            <p id="wechat-web-container-title" class="hidden">点击下方按钮打开 “<span id="wechat-app-name"></span>”</p>
+            <wx-open-launch-weapp id="launch-btn" username="gh_877d1674f00e" path="/page/index/index">
+                <template></template>
+            </wx-open-launch-weapp>
+        </div>
+        <div id="desktop-web-container" class="full desktop-web-container">
+            <p class="">请在手机打开网页链接</p>
+        </div>
+        <video></video>
+    </div>
+ 
+ 
+</body></html>
