@@ -3,9 +3,10 @@
 <textarea id="h"></textarea>
 <script>
   var editor;
-  function loadbox(a,b,c,d)
+  function loadbox(a,b,c,d){
   editor = CodeMirror.fromTextArea(document.getElementById("h"), {
     lineNumbers: a,//true
     mode: b//"text/x-java"
   });
+  }
 </script>
