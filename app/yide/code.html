@@ -2,7 +2,10 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
 <textarea id="h"></textarea>
 <script>
-  var editor = CodeMirror.fromTextArea(document.getElementById("h"), {
-    lineNumbers: true
+  var editor;
+  function loadbox(a,b,c,d)
+  editor = CodeMirror.fromTextArea(document.getElementById("h"), {
+    lineNumbers: a,//true
+    mode: b//"text/x-java"
   });
 </script>
