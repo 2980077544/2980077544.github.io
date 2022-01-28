@@ -1,12 +1,40 @@
+<html>
+<head>
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+
+<!--引入css文件，用以支持主题-->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/theme/dracula.css"/>
+
+<!--支持代码折叠-->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/addon/fold/foldgutter.css"/>
+<script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/addon/fold/foldcode.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/addon/fold/foldgutter.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/addon/fold/brace-fold.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/addon/fold/comment-fold.js"></script>
+
+<!--groovy代码高亮-->
+<script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/mode/groovy/groovy.js"></script>
+
 <script src="https://cdn.bootcdn.net/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
-<textarea id="h"></textarea>
+
 <script>
   var editor;
   function loadbox(a,b,c,d){
+    
   editor = CodeMirror.fromTextArea(document.getElementById("h"), {
-    lineNumbers: a,//true
-    mode: b//"text/x-java"
+    lineNumbers: a,  //true
+    mode:        b,  //"text/x-java"
+    theme:       c,  //"dracula"
+    gutters:     ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    lineWrapping: true,	//代码折叠
+    foldGutter: true,
+    
   });
   }
 </script>
+</head>
+<body>
+<textarea id="h"></textarea>
+</body>
+</html>
