@@ -48,12 +48,12 @@ function loadbox(a,b,c,d){
   editor.setSize('100%', '100%');
   document.getElementById("h").setAttribute('style', 'background: #282A36;position:absolute;width:100%;height:100%;');
   }
-alert("undefined" == typeof awj)
+alert("undefined" == typeof awj);
   if("undefined" == typeof awj){
     //Android JavaScriptInterface undefined
 if(getQuery("used")=="androidyide"&&getQuery("case")=="getlaid"){
 alert('本功能应该仅应用于调试');
-loadbox(getQuery('l0'),getQuery('l1'),getQuery('l2'),getQuery('l3'));
+loadbox(true,getQuery('l1'),getQuery('l2'),getQuery('l3'));
 }
   }else{
     loadbox(awj.loadn(0),awj.loadn(1),awj.loadn(2),awj.loadn(3));
