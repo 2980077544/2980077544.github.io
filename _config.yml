@@ -5,7 +5,7 @@ header-img: img/home-bg-he.png
 email: 2980077544@qq.com
 description: "Yuanwow的博客"
 keyword: "yuanwow, yuanwow的博客, Yuanwow, YuanWow"
-url: "https://blog.left.ga"          # your host, for absolute URL
+url: "https://2980077544.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/2980077544/2980077544.github.io.git" #code repository | 代码仓库
 
